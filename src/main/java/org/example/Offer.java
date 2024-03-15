@@ -3,4 +3,5 @@ package org.example;
 public enum Offer {
     BUY_ONE_GET_ONE_FREE,
     BUY_TWO_GET_ONE_FREE,
+    BUY_THREE_FOR_FIVE_POUNDS,
 }

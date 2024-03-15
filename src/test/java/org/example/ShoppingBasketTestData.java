@@ -34,4 +34,14 @@ public class ShoppingBasketTestData {
     public static List<String> getItemsToAvailMultipleOffers() {
         return List.of("Apple", "Banana", "Lime", "Lime", "Melon", "Melon", "Melon", "Melon", "Melon");
     }
+
+    public static List<String> getThreeBeers(){
+        return List.of("Beer", "Beer", "Beer");
+    }
+    public static List<String> getTwoBeers(){
+        return List.of("Beer", "Beer");
+    }
+    public static List<String> getFiveBeers(){
+        return List.of("Beer", "Beer","Beer", "Beer","Beer");
+    }
 }
