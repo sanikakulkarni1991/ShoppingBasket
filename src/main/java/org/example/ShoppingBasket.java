@@ -37,7 +37,11 @@ public class ShoppingBasket {
                 case BUY_TWO_GET_ONE_FREE:
                     freeItems = quantity / 3;
                     break;
-            }
+                case BUY_THREE_FOR_FIVE_POUNDS:
+                    long quotient = quantity / 3;
+                    BigDecimal discountPerThreeItems = product.getPrice().multiply(BigDecimal.valueOf(3)).subtract(BigDecimal.valueOf(5));
+                    return discountPerThreeItems.multiply(BigDecimal.valueOf(quotient));
+           }
         }
         return product.getPrice().multiply(BigDecimal.valueOf(freeItems));
     }

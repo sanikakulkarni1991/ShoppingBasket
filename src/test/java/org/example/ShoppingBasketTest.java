@@ -23,11 +23,13 @@ public class ShoppingBasketTest {
         Product banana = new Product("Banana", new BigDecimal("0.20"));
         Product melon = new Product("Melon", new BigDecimal("0.50"), Offer.BUY_ONE_GET_ONE_FREE);
         Product lime = new Product("Lime", new BigDecimal("0.15"), Offer.BUY_TWO_GET_ONE_FREE);
+        Product beer = new Product("Beer", new BigDecimal("2.59"), Offer.BUY_THREE_FOR_FIVE_POUNDS);
 
         products.addProduct(apple);
         products.addProduct(banana);
         products.addProduct(melon);
         products.addProduct(lime);
+        products.addProduct(beer);
     }
 
     @DisplayName("Test NO offers")
@@ -56,6 +58,20 @@ public class ShoppingBasketTest {
     @MethodSource("generateArgumentsStreamToTestMultipleOffers")
     public void testMultipleOffers(List<String> cart, BigDecimal result) {
         Assertions.assertEquals(result, shoppingBasket.calculateCost(cart, products));
+    }
+
+    @DisplayName("Test BUY_THREE_FOR_FIVE_POUNDS offers")
+    @ParameterizedTest
+    @MethodSource("generateArgumentsStreamToTestGetFiveForFivePoundsOffer")
+    public void testGetFiveForFivePoundsOffer(List<String> cart, BigDecimal result) {
+        Assertions.assertEquals(result, shoppingBasket.calculateCost(cart, products));
+    }
+    private static Stream<Arguments> generateArgumentsStreamToTestGetFiveForFivePoundsOffer() {
+        List<Arguments> listOfArgument = new LinkedList<>();
+        listOfArgument.add(Arguments.of(ShoppingBasketTestData.getThreeBeers(), new BigDecimal("5.00")));
+        listOfArgument.add(Arguments.of(ShoppingBasketTestData.getTwoBeers(), new BigDecimal("5.18")));
+        listOfArgument.add(Arguments.of(ShoppingBasketTestData.getFiveBeers(), new BigDecimal("10.18")));
+        return listOfArgument.stream();
     }
     private static Stream<Arguments> generateArgumentsStreamToTestNoOffer() {
         List<Arguments> listOfArgument = new LinkedList<>();
